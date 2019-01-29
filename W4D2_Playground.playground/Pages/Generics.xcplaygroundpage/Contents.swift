@@ -20,7 +20,7 @@ func printMyTwoNumbersDouble(num1: Double, num2: Double){
 /*:
  Instead, we can write a function that takes a generic type so we can print any two values
  */
-func printMyTwoNumbers<Element>(num1: Element, num2: Element){
+func printMyTwoNumbers<wq>(num1: wq, num2: wq){
   
   print("My numbers are \(num1) and \(num2)")
 }
@@ -41,7 +41,7 @@ printMyTwoNumbers(num1: "three", num2: "four")
  */
 
 func multiply<Element: Numeric>(num1: Element, num2: Element) {
-  
+  print(num1 + num2)
 }
 
 
@@ -55,6 +55,16 @@ func multiply<Element: Numeric>(num1: Element, num2: Element) {
  - Experiment:
  Write a generic function that takes in two parameters. One parameter is an array of elements, and the other is one element you are trying to find in the array. Return the index where the element exists in the array. ie: Given `[1,5,2,4]` and `'5'`, the returned index is `1`
  */
+func check<T:Numeric>(num1:[T],num2:T)->Int?{
+    if(num1.contains(num2)){
+        for i in 0..<num1.count{
+            if(num1[i] == num2){
+                return i
+            }
+        }
+    }
+    return  nil
+}
 /*:
  - Note:
  For this experiment, refrain from using the array method `indexOf`. Also the protocol `Equatable` might be useful here. Search it up to see what it's about.
@@ -66,6 +76,7 @@ func multiply<Element: Numeric>(num1: Element, num2: Element) {
  - Callout(Challenge):
  During class you saw a simple implementation of a stack where data is inserted (pushed) to the top of the stack when data is added. When data is removed (pop) from the stack, it removes the first item at the top of the stack. We will now implement a similar data structure called a "queue" as a generic.
  */
+
 /*:
  - Note:
  You can think of a queue like a line up at a grocery store. The first person in line finishes their transaction, and then leaves the line up. Any new customers have to start at the back of the line up.
@@ -74,8 +85,19 @@ func multiply<Element: Numeric>(num1: Element, num2: Element) {
  - enqueue: add an item to the queue
  - dequeue: remove an item from the queue, and return the removed element
  */
-
-
+func enqueue(arr:[String], add:String)->[String]{
+    var copyArr = arr
+    copyArr.append(add)
+   return copyArr
+}
+func dequeue(arr:[String])->(String,[String]){
+    var copyArr = arr
+    
+    return (copyArr.removeFirst(),copyArr)
+}
+let que = ["1","2","3","4","5"]
+enqueue(arr: que, add: "4")
+dequeue(arr: que)
 
 //: [Next](@next)
 

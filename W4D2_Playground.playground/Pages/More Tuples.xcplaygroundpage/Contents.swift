@@ -40,7 +40,13 @@ default:
  - Halloween Day - Oct 31
  - Otherwise, indiciate the given day is not a holiday
  */
-
+let day = (12,18)
+switch day {
+case (12,5),(1,1),(2,14),(10,31):
+    print("\(day) is a holiday")
+default:
+    print("\(day) is not a holiday")
+}
 
 /*:
  - Callout(Challenge):

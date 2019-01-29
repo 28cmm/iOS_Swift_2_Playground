@@ -53,12 +53,41 @@ catch let error {
  - Experiment:
  Create a Human class that has a name and age property. Also, create an initializer for this class to set its initial properties.
  */
-
+enum humanError:Error{
+    case invalidName
+    case tooYoung
+}
+class human{
+    var age:Int = Int()
+    var name:String = ""
+    init(name:String,age:Int) throws {
+        if(age < 18){
+            throw humanError.tooYoung
+        }
+        if(name == ""){
+            throw humanError.invalidName
+        }
+        
+        self.name = name
+        self.age = age
+        
+    }
+    
+}
+do{
+    let jack = try human(name: "", age: 17)
+    jack.age
+}catch let error{
+    print("error is thrown:\(error)")
+}
 
 /*:
  - Experiment:
  Create your own errors that throw when the name provided is empty or if the age is invalid. Go back and update the Human's initializer to throw an error when the data passed in is invalid.
  */
+
+
+
 
 
 /*:
@@ -100,7 +129,26 @@ let email: String? = "user1@lighthouselabs.ca"
 //let username: String? = nil
 //let password: String? = nil
 //let email: String? = "user1@lighthouselabs.ca"
+enum inputError:Error{
+    case nameError
+    case passwordError
+    case emailError
+}
+func valid(name:String?,password:String?,email:String?) throws ->Bool{
+    guard  let _ = name else {
+        throw inputError.nameError
 
+    }
+    guard  let _ = password else {
+        throw inputError.passwordError
+
+    }
+    guard  let _ = email else {
+        throw inputError.emailError
+
+    }
+    return true
+}
 
 /*:
  - Callout(Challenge):
@@ -110,6 +158,9 @@ let email: String? = "user1@lighthouselabs.ca"
  
  Throw an error if the model doesn't exist, insufficient amount of money was given, or the car is out of stock.
  */
+enum dealershipError:Error{
+    case modelError, moneyError, stockError
+}
 class HondaDealership{
   
   var availableCarSupply = ["Civic" : (price: 5000, count: 5),
@@ -118,6 +169,23 @@ class HondaDealership{
   
   
   
+}
+func sellCar(model: String, offeredPrice: Int) throws{
+    if(model == "Civic" || model == "CRV" || model == "Prelude"){
+        let count = HondaDealership()
+        
+        let price = count.availableCarSupply[0]
+        let amount = price["Civic"]
+
+        if(offeredPrice < amount[.price]){
+            
+        }else{
+            
+        }
+    }else{
+        throw dealershipError.modelError
+    }
+    
 }
 
 //: [Next](@next)

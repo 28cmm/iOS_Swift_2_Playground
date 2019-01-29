@@ -29,6 +29,8 @@ let myView: UIView = UIButton()
  Try using the `is` operator on `myView`. Take a look at the evaluation on the right to see what the results are. ie: `myView is UIView`. Try checking if `myView` is any of the following views: `UIButton`, `UITableView`, `UIImageView`
  */
 
+let check = myView is UIButton
+
 
 /*:
  - Experiment:
@@ -45,12 +47,16 @@ let myView: UIView = UIButton()
 
 let myCastedButtonView = myView as? UIButton
 
-
+let cast = myView as? UITableView
 /*:
  - Experiment:
  Now that we downcast our `myView` to an actual UIButton, use conditional unwrapping to ensure it is not nil, then try calling the `setTitle` method to ensure it can be called.
  */
-
+if let unwrapped = myCastedButtonView{
+    unwrapped.setTitle("Test", for: .normal)
+} else{
+    
+}
 
 /*:
  - Callout(Challenge):
@@ -67,6 +73,20 @@ view.addSubview(UIButton())
 /*:
  And we need to find all buttons. Write a function to search for `UIButtons` in this view's `subviews`, and return an array will all the buttons.
  */
+func checkView(view:UIView)->[UIButton]{
+    var item2 = [UIButton]()
+    for item in view.subviews {
+        let myCastButton = item as? UIButton
+        if let unwrapp = myCastButton{
+            item2.append(unwrapp)
+        }else{
+            
+        }
+        
+    }
+    return item2
+}
+checkView(view: view)
 
 
 /*:
@@ -82,10 +102,21 @@ class MediaItem {
 }
 
 class Movie: MediaItem {
+    var director:String = "Jason"
+    override init(name: String) {
+      super.init(name: director)
+    }
 }
 
 class Song: MediaItem {
+    var artist:String = "Daisy"
+    override init(name: String) {
+        super.init(name: artist)
+    }
 }
+
+let jack = Movie(name: "sad")
+jack.director
 
 /*:
  - Callout(Challenge - Part 2):

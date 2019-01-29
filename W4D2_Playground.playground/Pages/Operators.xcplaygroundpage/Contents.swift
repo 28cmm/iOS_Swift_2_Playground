@@ -82,6 +82,12 @@ var incrementOne = 4
 var incrementTwo = incrementOne+++
 
 
+postfix operator ++
+postfix func ++ (number: Int) -> Int{
+    
+    return number * 4
+}
+
 /*:
  - Experiment:
  Create your own custom operator using the square root symbol here: √
@@ -99,7 +105,11 @@ var incrementTwo = incrementOne+++
  - Callout(Challenge):
  When we have percentage values, we tend to convert them into their decimal form before doing any arithmetic to them. Create an operator with the '%' that will be a convenient operator to convert Int values into a usable percentage value. ie: 10% = 0.1
  */
-
+postfix operator %
+postfix func % (left: Int) -> Double{
+    return Double(left/100)
+}
+var match = 100%
 
 /*:
  - Callout(Challenge):
@@ -108,6 +118,19 @@ var incrementTwo = incrementOne+++
  For example, [1,2] + [3,4] = [4,6]. If the array count size are not the same, then return nil
  */
 
+func + (left:[Int],right:[Int]) -> [Int]?{
+    if(left.count != right.count){
+        return nil
+    }else{
+        var varr = [Int]()
+        for i in 0..<left.count{
+            varr[i] = left[i] + right[i]
+        }
+        return varr
+    }
+
+}
+var wqe = [2,3,4]+[2,3,6]
 
 
 //: [Next](@next)

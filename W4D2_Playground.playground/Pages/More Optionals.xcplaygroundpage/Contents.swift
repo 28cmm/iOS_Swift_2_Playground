@@ -8,17 +8,18 @@
  Declare a optional Double value and set it to nil.
  */
 
-
+var doubleVal:Double? = nil
 /*:
  - Experiment:
  Assign a value your optional Double.
  */
 
-
+doubleVal = 20.0
 /*:
  - Experiment:
  Force unwrap the optional value. Why do you have to be careful about force unwrapping?
  */
+
 
 
 /*:
@@ -26,12 +27,26 @@
  Use conditional unwrapping to verify if the optional has a value. Print the value if there is something, otherwise, print out to indicate there is no value present. Why is conditional unwrapping better than force unwrapping?
  */
 
+if let unwrapped = doubleVal{
+    print("ther is \(unwrapped)")
+}else{
+    print("there is nothing")
+}
 
 /*:
  - Callout(Challenge):
  Create a function that removes the `nil` values from the array and returns a new array with only the valid Strings.
  */
 var testData: [String?] = ["Heather", nil, "Mike", "John", nil, nil, "Bob"]
+
+var nilData:[String] = [String]()
+for i in 0..<testData.count{
+    if(testData[i] != nil){
+        nilData.append(testData[i]!)
+    }
+}
+//testData.remove(at: )
+
 
 
 /*:
@@ -41,9 +56,32 @@ var testData: [String?] = ["Heather", nil, "Mike", "John", nil, nil, "Bob"]
  Below is some test data you can use to test your function.
  */
 // Should pass all checks and print all information
-let username: String? = "user1"
-let password: String? = "password123"
-let email: String? = "user1@lighthouselabs.ca"
+
+//let username: String? = "user1"
+//let password: String? = "password123"
+//let email: String? = "user1@lighthouselabs.ca"
+
+//func valid(name:String?,password:String?,email:String?)->Bool{
+//    if let _ = name{
+//
+//    }else{
+//        print("name is empty")
+//        return false
+//    }
+//    if let _ = password{
+//
+//    }else{
+//        print("password is empty")
+//        return false
+//    }
+//    if let _ = email{
+//
+//    }else{
+//        print("email is empty")
+//        return false
+//    }
+//    return true
+//}
 
 // Should stop at password check and indicate password field is empty
 //let username: String? = "user1"
@@ -51,11 +89,11 @@ let email: String? = "user1@lighthouselabs.ca"
 //let email: String? = "user1@lighthouselabs.ca"
 
 // Should stop at username check and indicate username field is empty
-//let username: String? = nil
-//let password: String? = nil
-//let email: String? = "user1@lighthouselabs.ca"
+let username: String? = nil
+let password: String? = nil
+let email: String? = "user1@lighthouselabs.ca"
 
-
+//valid(name: username, password: password, email: email)
 
 /*:
  ## Guard Let
@@ -91,7 +129,15 @@ isMyNumberANegativeValue(myNumber: myNumber)
  - Experiment:
  Create a function that takes in two number parameters and divide them. We don't like dividing by zero, so ensure this doesn't happen. Otherwise, return the calculated value.
  */
+func cal(num1:Int, num2:Int)->Int?{
+    guard num2 != 0 else {
+        print("\(num2) is zero cant cal")
+        return nil
+    }
+    return num1/num2
+}
 
+cal(num1: 10, num2: 0)
 
 /*:
  Let's take a look at another example and see how we can use guard for optionals
@@ -105,7 +151,8 @@ func isMyNumberAnOptional(myOptionalNumber: Int?){
   // This guard checks if 'myOptionalNumber' has a value or not. Similar concept to conditional unwrapping
   // If 'myOptionalNumber' is indeed nil, the else block will run
   // Otherwise, our guard let statement is looking for a valid value, and the code will continue to run
-  guard let myUnwrapped = myOptionalNumber else {
+  guard let myUnwrapped = myOptionalNumber
+    else {
     
     print("This value is nil")
     return
@@ -123,12 +170,38 @@ isMyNumberAnOptional(myOptionalNumber: myOptionalNumber)
  - Experiment:
  Create a function that takes in an array of numbers. Have the function add all the numbers together and return the result. Make sure to `guard` against an empty array. Use `array.first` to check if there is at least one value in the array.
  */
+func array(arr:[Int]?)->Int?{
+    guard let myUnwrapped = arr,
+      myUnwrapped.first != nil else {
+        return nil
+    }
+    var result = 0
+    for item in arr!{
+        result = item + result
+    }
+    return result
+}
+
+let ark = [21,21,3,21]
+array(arr: ark)
+
 
 
 /*:
  - Callout(Challenge):
  Now that we've learnt this new guard statement, let's rewrite the form validation challenge using the guard statements. How does it improve our current implementation?
  */
-
+func valid(name:String?,password:String?,email:String?)->Bool{
+    guard  let _ = name else {
+        return false
+    }
+    guard  let _ = password else {
+        return false
+    }
+    guard  let _ = email else {
+        return false
+    }
+    return true
+}
 
 //: [Next](@next)
